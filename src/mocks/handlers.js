@@ -17,6 +17,23 @@ const handlers = [
   MockServiceWorker.http.get("/api/users", () => {
     return MockServiceWorker.HttpResponse.json(userData);
   }),
+
+  MockServiceWorker.http.post("/api/register", async ({ request }) => {
+    const newData = await request.json();
+
+    const registerData = userData.find((data) => {
+      return data.uid === newData.uid;
+    });
+    console.log(registerData);
+    if (registerData) {
+      return new MockServiceWorker.HttpResponse(null, {
+        status: 403,
+        statusText: "already uid",
+      });
+    }
+    userData.push(newData);
+    return MockServiceWorker.HttpResponse.json(newData, { status: 201 });
+  }),
 ];
 
 export default handlers;
