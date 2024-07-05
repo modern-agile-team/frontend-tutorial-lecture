@@ -19,24 +19,15 @@ function registerHandler() {
           Accept: "application / json",
         },
         body: JSON.stringify(req),
-      }).then((res) => res.json);
+      })
+        .then((res) => res.json)
+        .then((data) => {
+          console.log(data);
+        });
     } catch (err) {
-      if (err.response.status === 403) {
-        alert("이미 존재하는 아이디 입니다.");
-      }
+      alert("이미 존재하는 아이디 입니다.");
     }
   } else {
     alert("비밀번호가 일치하지 않습니다.");
   }
-}
-
-function getUser() {
-  fetch("/api/users", {
-    method: "GET",
-    headers: {
-      Accept: "application / json",
-    },
-  })
-    .then((res) => res.json)
-    .then((res) => console.log(res));
 }

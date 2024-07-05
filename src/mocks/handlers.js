@@ -24,15 +24,31 @@ const handlers = [
     const registerData = userData.find((data) => {
       return data.uid === newData.uid;
     });
-    console.log(registerData);
     if (registerData) {
       return new MockServiceWorker.HttpResponse(null, {
-        status: 403,
-        statusText: "already uid",
+        status: 409, //conflict 충돌 상태코드
+        statusText: "the uid already exists.",
       });
     }
     userData.push(newData);
     return MockServiceWorker.HttpResponse.json(newData, { status: 201 });
+  }),
+
+  MockServiceWorker.http.post("/api/login", async ({ request }) => {
+    const loginData = await request.json();
+
+    const loginSuccess = userData.find((data) => {
+      return data.uid === loginData.uid && data.password === loginData.password;
+    });
+    if (!loginSuccess) {
+      return new MockServiceWorker.HttpResponse(null, {
+        status: 401, //액세스 권한이 없음
+        statusText: "the uid password does not exist.",
+      });
+    }
+    return MockServiceWorker.HttpResponse.json(loginData, {
+      status: 200, //성공
+    });
   }),
 ];
 
