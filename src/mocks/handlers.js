@@ -1,3 +1,5 @@
+"use strict";
+
 const userData = [
   {
     id: 1,

@@ -12,21 +12,27 @@ function registerHandler() {
       password: password.value,
       name: name.value,
     };
-    try {
-      fetch("/api/register", {
-        method: "POST",
-        headers: {
-          Accept: "application / json",
-        },
-        body: JSON.stringify(req),
+    fetch("/api/register", {
+      method: "POST",
+      headers: {
+        Accept: "application / json",
+      },
+      body: JSON.stringify(req),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("이미 존재하는 아이디 입니다.");
+        }
+        return res.json();
       })
-        .then((res) => res.json)
-        .then((data) => {
-          console.log(data);
-        });
-    } catch (err) {
-      alert("이미 존재하는 아이디 입니다.");
-    }
+      .then(() => {
+        if (confirm("회원가입 성공! 로그인페이지로 이동하시겠습니까?")) {
+          location.href = "/public/views/login.html";
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
   } else {
     alert("비밀번호가 일치하지 않습니다.");
   }
