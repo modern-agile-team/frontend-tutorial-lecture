@@ -3,19 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>login-lecture | login</title>
     <script
       src="https://cdn.jsdelivr.net/npm/msw/lib/iife/index.js"
       defer
     ></script>
     <script src="/src/apis/loginApi.js" defer></script>
     <script src="/src/index.mjs" type="module" defer></script>
+    <link rel="stylesheet" href="/public/styles/global.css" />
   </head>
   <body>
     <h1>로그인페이지</h1>
-    <input type="text" id="uid" value="" placeholder="아이디 입력" />
-    <input type="password" id="password" value="" placeholder="비밀번호 입력" />
-    <button onclick="loginHandler()">로그인</button>
-    <button><a href="/public/views/register.html">회원가입</a></button>
+    <div class="form-container">
+      <input type="text" id="uid" value="" placeholder="아이디 입력" />
+      <input
+        type="password"
+        id="password"
+        value=""
+        placeholder="비밀번호 입력"
+      />
+      <button onclick="loginHandler()">로그인</button>
+      <button><a href="/public/views/register.html">회원가입</a></button>
+    </div>
   </body>
 </html>

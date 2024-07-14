@@ -5,6 +5,12 @@ const uid = document.getElementById("uid"),
 const registerBtn = document.getElementById("registerSubmit");
 
 function registerHandler() {
+  //에러핸들링
+  if (uid.value === "" || password.value === "") {
+    alert("아이디 비밀번호를 입력해 주세요.");
+    return 0;
+  }
+
   if (password.value === checkPw.value) {
     const req = {
       id: 3,
