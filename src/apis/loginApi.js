@@ -1,6 +1,8 @@
 const uid = document.getElementById("uid"),
-  password = document.getElementById("password");
+  password = document.getElementById("password"),
+  loginBtn = document.getElementById("loginBtn");
 
+loginBtn.addEventListener("click", loginHandler);
 function loginHandler() {
   const req = {
     uid: uid.value,
